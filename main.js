@@ -25,6 +25,9 @@ var app = new Vue({
         },
         updateImage(varianteImage) {  // ES6 notation
             this.image = varianteImage
+        },
+        RemoveCart(){
+            this.cart -=1
         }
     }
    

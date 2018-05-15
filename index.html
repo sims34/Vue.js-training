@@ -33,10 +33,15 @@
                         {{v.varianteColor}}</p>
                 </div>
                 <button v-on:click="addToCart">Add to cart</button>
+
+                <button @click="RemoveCart">Remove to cart</button>
+           
                 <div class="cart">
                     <p>Cart ({{cart}})</p>
                 </div>
             </div>
+           
+                
             
         </div>  
            
