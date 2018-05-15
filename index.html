@@ -20,8 +20,10 @@
            
             <div class="product-info">
                     <h1>{{ product }}</h1>
-                    <!--challenge n°2 use v-bind with shorthand ':href' for set up a dynamics link
-                    <a :href="link">Link-bind</a>-->
+<!--challenge n°2 use v-bind with shorthand ':href' for set up a dynamics link
+    <a :href="link">Link-bind</a> == <a v-bind:href="link">Link-bind</a>  -->
+        <p v-if="InStock">In stock</p>
+        <p v-else>Out of Stock</p>
             </div>
             
         </div>  
