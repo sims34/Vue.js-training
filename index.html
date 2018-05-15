@@ -19,12 +19,18 @@
             </div>
            
             <div class="product-info">
-                    <h1>{{ product }}</h1>
-<!--challenge n°2 use v-bind with shorthand ':href' for set up a dynamics link
-    <a :href="link">Link-bind</a> == <a v-bind:href="link">Link-bind</a>  -->
-        <p v-if="InStock">In stock</p>
-        <p v-else>Out of Stock</p>
-            </div>
+                <h1>{{ product }}</h1>
+                <!--challenge n°2 use v-bind with shorthand-->
+                <a :href="link">Link-bind</a> <!--== <a v-bind:href="link">Link-bind</a> -->
+                <!-- another method to display element as boolean -->
+                <p v-show="InStock">Show me in the Stock !</p>
+                <p v-if="Inventory >10">In stock</p>
+                <p v-else-if="Inventory <10 && Inventory >0">Out of Stock</p>
+                <p v-else>No Stock</p>
+                <p v-if="onSale"><span>On Sale !</span></p>
+                <p v-else>No Sale</p>
+            
+        </div>
             
         </div>  
            

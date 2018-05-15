@@ -3,8 +3,10 @@ var app = new Vue({
     data:{
         product:'Socks',
        image: './assets/vmSocks-green-onWhite.jpg',
-       link: 'https://blackstreet.com',
-       InStock : true
+       link: 'https://google.com',
+       InStock : true,
+       Inventory : 100,
+       onSale: false
 
     }
 })
