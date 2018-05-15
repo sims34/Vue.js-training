@@ -20,15 +20,29 @@
            
             <div class="product-info">
                     <h1>{{ product }}</h1>
-                    <!--challenge n°2 use v-bind with shorthand ':href' for set up a dynamics link
-                    <a :href="link">Link-bind</a>-->
+                    <p v-if= "inStock">In Stock</p>
+                    <p v-else>Out Stock</p>
+
+                    <ul>
+                        <li v-for="detail in details">{{ detail }}</li>
+                    </ul>
+
+                <div v-for=" v in variants" :key=" v.varianteId">
+                    <p @mouseover="updateImage(v.varianteImage)"> 
+                        <!-- shorthand of v-on: == @ + function, example : @click, @mouseover, ... -->
+                        {{v.varianteColor}}</p>
+                </div>
+                <button v-on:click="addToCart">Add to cart</button>
+                <div class="cart">
+                    <p>Cart ({{cart}})</p>
+                </div>
             </div>
             
         </div>  
            
     </div>
 
-<!-- development version, includes helpful console warnings -->
+
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 <script src ="main.js"></script>
 
