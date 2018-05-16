@@ -19,10 +19,15 @@
             </div>
            
             <div class="product-info">
+       
                     <h1>{{ product }}</h1>
                     <p v-if= "inStock">In Stock</p>
-                    <p v-else>Out Stock</p>
-
+                 <!-- Exercice 6 binding class with inStock value : -->
+                    <p v-else :class="{outOfStock : !inStock}">Out Stock</p>
+                <!--    SOLUTION : 
+                     we created a new attribut outOfStock in css file (ie. style.css) and the value inStock to false
+                     so, the css style take place on the <p> if the value inStock is false
+                      -->
                     <ul>
                         <li v-for="detail in details">{{ detail }}</li>
                     </ul>
@@ -33,6 +38,12 @@
                      :style="{backgroundColor : v.varianteColor}"
                      @mouseover="updateImage(v.varianteImage)">
                 </div>
+
+ <!-- COMMENT THE BINDING CLASS (v-bin:class == :class) :
+    use classe bind => :class="nameObject" or :class="{attribut : value}", set '{}' when we are an attribut + value. Can be css attribute 
+    example : :class="{disabledButton : ! inStock} => disabledButton = css attribute (ie style.css) and inStock = value.
+    we ask to Vue to set the current class with css attribut (button grey color) if the value InStock = false.
+  -->
                 <button v-on:click="addToCart"
                         :disabled="! inStock"
                         :class="{disabledButton : ! inStock}">Add to cart</button>
