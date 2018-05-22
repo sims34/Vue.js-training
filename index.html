@@ -28,12 +28,12 @@
                     </ul>
 
                 <div class="color-box"
-                     v-for=" v in variants" 
+                     v-for=" (v, index) in variants" 
                      :key=" v.varianteId"
                      :style="{backgroundColor : v.varianteColor}"
-                     @mouseover="updateImage(v.varianteImage)">
+                     @mouseover="updateImage(index)">
                 </div>
-    
+    <!-- computed : set image with coputed method -->
                 <button v-on:click="addToCart"
                         :disabled="! inStock"
                         :class="{disabledButton : ! inStock}">Add to cart</button>
