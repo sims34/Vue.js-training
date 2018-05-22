@@ -4,6 +4,7 @@ var app = new Vue({
     data:{
        product:'Socks',
        brand : 'Vue Mastery',
+       onSale: true,  //exercice onSale
       // image: './assets/vmSocks-green.jpg',
     //    inStock: true,
        selectVariant: 0,
@@ -45,7 +46,18 @@ var app = new Vue({
         //boolean property if inStock == true
         inStock(){ 
             return this.variants[this.selectVariant].varianteQuantity
+        },
+        //exercice
+        onSaleFunction(){
+            return this.brand +" " + this.product
         }
+        //  CORRECTION : OTHER WAY SET BOOLEAN INTO THE FUNCTION
+        // sale() {
+        //     if (this.onSale) {
+        //         return this.brand + ' ' + this.product + ' are on sale!'
+        //       } 
+        //         return  this.brand + ' ' + this.product + ' are not on sale'
+        //     }
     }
    
 })

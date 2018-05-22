@@ -40,6 +40,8 @@
                 <div class="cart">
                     <p>Cart ({{cart}})</p>
                 </div>
+                <p v-show="onSale">{{onSaleFunction}}</p>
+                <!--THE CORRECTION : just call the method sale() no need condition v-show=""-->
             </div>
             
         </div>  
