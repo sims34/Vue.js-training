@@ -1,4 +1,21 @@
-
+//creation component
+Vue.component('product',{
+    // 7 ways to write template : https://medium.com/js-dojo/7-ways-to-define-a-component-template-in-vuejs-c04e0c72900d
+    template: ' <div></div> ', 
+    
+    data(){         //object
+        return{
+            // write your stuff ...
+        } 
+        
+    },
+    methods :{
+        // write your stuff ...
+    },
+    computed :{
+        // write your stuff ...
+    },
+})
 var app = new Vue({
     el:'#app',
     data:{
