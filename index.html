@@ -33,6 +33,7 @@
                      :style="{backgroundColor : v.varianteColor}"
                      @mouseover="updateImage(v.varianteImage)">
                 </div>
+    
                 <button v-on:click="addToCart"
                         :disabled="! inStock"
                         :class="{disabledButton : ! inStock}">Add to cart</button>
