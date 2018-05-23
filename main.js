@@ -28,17 +28,14 @@ Vue.component('product',{
                     </ul>
 
                 <div class="color-box"
-                    v-for=" v in variants" 
+                    v-for=" (v,index) in variants" 
                     :key=" v.varianteId"
                     :style="{backgroundColor : v.varianteColor}"
-                    @mouseover="updateImage(v.varianteImage)">
+                    @mouseover="updateImage(index)">
                 </div>
                 <button v-on:click="addToCart"
                         :disabled="! inStock"
                         :class="{disabledButton : ! inStock}">Add to cart</button>
-                <div class="cart">
-                    <p>Cart ({{cart}})</p>
-                </div>
             </div>
         </div>
     `,  
@@ -47,7 +44,8 @@ Vue.component('product',{
         return{
             product:'Socks',
             brand : 'Vue Mastery',
-            image: './assets/vmSocks-green.jpg',
+            selectedVariant: 0,
+            //image: './assets/vmSocks-green.jpg',
             inStock: true,
             details :[ "80 % cotton","20 % polyester","Gender-Neutral"],
             variants:[
@@ -62,21 +60,26 @@ Vue.component('product',{
                   varianteImage :'./assets/vmSocks-blue.jpg' 
                 }
             ],
-            cart : 0
+           
         } 
         
     },
     methods :{
         addToCart : function(){ 
-            this.cart +=1
-        },
-        updateImage(varianteImage) {  // ES6 notation
-            this.image = varianteImage
+            //now this function it's just an emission of an event
+            this.$emit('add-to-cart',this.variants[this.selectedVariant].varianteId)  //name of of the event listener + add option id product
+                },
+        updateImage(index) {  // ES6 notation
+            this.selectedVariant = index
         }
+        
     },
     computed :{
         title(){
             return this.brand + ' -- '+ this.product
+        },
+        image(){
+            return this.variants[this.selectedVariant].varianteImage
         },
         shipping(){
             if(this.prenium){
@@ -93,7 +96,14 @@ Vue.component('product',{
 var app = new Vue({
     el:'#app',
     data :{
-        prenium : true
+        prenium : true,
+        cart : []
+    },
+    methods:{
+        updateCart(id){
+         //   this.cart +=1  basic test if method works
+         this.cart.push(id) // push id of socks to cart array
+        }
     }
     
    

@@ -11,8 +11,12 @@
     <div class="nav-bar"></div>
 
     <div id ="app">
+            <div class="cart">
+            <!-- cart is array[] and we want only the number of product in the array -->
+                <p>Cart ({{cart.length}})</p>
+            </div>
         <!-- always call the props into the balise like below : -->
-        <product :prenium = "prenium"></product>
+        <product :prenium = "prenium" @add-to-cart="updateCart"></product>
     </div>
 
 
