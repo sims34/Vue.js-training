@@ -23,9 +23,7 @@ Vue.component('product',{
                     <p v-if= "inStock">In Stock</p>
                     <p v-else>Out Stock</p>
                     <p> Shipping price : {{ shipping }}</p>
-                    <ul>
-                        <li v-for="detail in details">{{ detail }}</li>
-                    </ul>
+                    <product-detail :details = "details"></product-detail>
 
                 <div class="color-box"
                     v-for=" v in variants" 
@@ -88,12 +86,38 @@ Vue.component('product',{
     },
 })
 
+//Exercice details component
+Vue.component('product-detail',{
+    props:{
+        details:{
+            type: Array,
+            required: true
+        }
+    },
+    template: `
+            <ul>
+            <li v-for="detail in details">{{ detail }}</li>
+            </ul>
+        `,
+})
+
+
+
+
+
+
+
+
+
+
+
 //root element of Vuejs it become the 'Parent' of the application
 // the component it's the 'child'
 var app = new Vue({
     el:'#app',
     data :{
         prenium : true
+      
     }
     
    
