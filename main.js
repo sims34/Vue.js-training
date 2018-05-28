@@ -36,6 +36,7 @@ Vue.component('product',{
                 <button v-on:click="addToCart"
                         :disabled="! inStock"
                         :class="{disabledButton : ! inStock}">Add to cart</button>
+                <button v-on:click="removeToCart">Remove article</button> 
             </div>
         </div>
     `,  
@@ -71,6 +72,10 @@ Vue.component('product',{
                 },
         updateImage(index) {  // ES6 notation
             this.selectedVariant = index
+        },
+        removeToCart(){
+            this.$emit('rm-to-cart');
+            //other way : this.$emit('rm-to-cart',this.variants[this.selectedVariant].varianteId);
         }
         
     },
@@ -103,6 +108,19 @@ var app = new Vue({
         updateCart(id){
          //   this.cart +=1  basic test if method works
          this.cart.push(id) // push id of socks to cart array
+        },
+        removeToCart(){
+            this.cart.pop();
+        /*
+        removeToCart(id){
+            for(var i = this.cart.length - 1; i >= 0; i--) {  // on part de la fin  tableau
+                if (this.cart[i] === id) {
+                this.cart.splice(i, 1);
+                }
+            }
+        }
+        
+        */
         }
     }
     
