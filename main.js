@@ -37,6 +37,17 @@ Vue.component('product',{
                         :disabled="! inStock"
                         :class="{disabledButton : ! inStock}">Add to cart</button>
             </div>
+            <div>
+                <h2>Review Product</h2>
+                  <p v-if="! reviews.length">No review yet !</p>  <!-- equivaut ===> reviews.length == 0  -->          
+                <ul>
+                    <li v-for="review in reviews">
+                        <p>{{review.name }}</p>
+                        <p>{{review.rating}} </p>
+                        <p> {{review.review}}</p>
+                    </li>
+                </ul>
+            </div>
             <product-review @submit-review="addReview"></product-review>
         </div>
     `,  
@@ -104,7 +115,7 @@ Vue.component('product-review',{
     <form class="review-form" @submit.prevent="onSubmit"> 
       <p>
         <label for="name">Name:</label>
-        <input id="name" v-model="name" placeholder="name">
+        <input id="name" v-model="name" placeholder="name" required>
       </p>
       
       <p>
@@ -133,21 +144,28 @@ Vue.component('product-review',{
       return{
           name: null,
           review: null,
-          rating: null
-      }
+          rating: null,
+          errors:[]
+      },
+      
     },
     methods:{
         onSubmit(){
-            //create a variable let work only in the onSubmit function != global variable
-            let productReview ={
-                name : this.name,
-                review : this.review,
-                rating : this.rating
+            if(this.name && this.review && this.rating){
+                //create a variable let work only in the onSubmit function != global variable
+                let productReview ={
+                    name : this.name,
+                    review : this.review,
+                    rating : this.rating
+                }
+                this.$emit('submit-review',productReview)
+                this.name = null
+                this.review= null
+                this.rating= null 
+            }else{
+                if()
             }
-            this.$emit('submit-review',productReview)
-            this.name = null
-            this.review= null
-            this.rating= null   
+             
         }
       
     }
