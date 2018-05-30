@@ -113,9 +113,16 @@ Vue.component('product-review',{
     //prevent == ES6 tag for create an event without reload the page.
     `
     <form class="review-form" @submit.prevent="onSubmit"> 
-      <p>
+
+            <p v-if="errors.length && !flag">
+                <b>Verified your error(s).</b>
+                <ul>
+                    <li v-for="er in errors"> {{ er }} </li>
+                </ul>
+            </P>
+
         <label for="name">Name:</label>
-        <input id="name" v-model="name" placeholder="name" required>
+        <input id="name" v-model="name" placeholder="name">
       </p>
       
       <p>
@@ -133,8 +140,15 @@ Vue.component('product-review',{
           <option>1</option>
         </select>
       </p>
-          
-      <p>
+      <p>Would you recommend this product?</p>
+      <label>
+        Yes
+        <input type="radio" value="Yes" v-model="recommend"/>
+      </label>
+      <label>
+        No
+        <input type="radio" value="No" v-model="recommend"/>
+      </label>
         <input type="submit" value="Submit">  
       </p>    
     
@@ -145,26 +159,38 @@ Vue.component('product-review',{
           name: null,
           review: null,
           rating: null,
-          errors:[]
-      },
+          errors:[],
+          flag : null,
+         recommend:null
+          
+      }
       
     },
     methods:{
         onSubmit(){
-            if(this.name && this.review && this.rating){
+            this.flag = false;
+            if(this.name && this.review && this.rating && recommend){
                 //create a variable let work only in the onSubmit function != global variable
                 let productReview ={
                     name : this.name,
                     review : this.review,
-                    rating : this.rating
+                    rating : this.rating,
+                    recommend:this.recommend
                 }
                 this.$emit('submit-review',productReview)
                 this.name = null
                 this.review= null
-                this.rating= null 
+                this.rating= null
+                this.flag = true
+                this.recommend=null
+                this.flag = true
             }else{
-                if()
+                if(!this.name) this.errors.push("Name is required.");  
+                if(!this.rating) this.errors.push("Rating is required.");
+                if(!this.review) this.errors.push("Review is required.");
+                if(!this.recommend) this.errors.push("Recommend is required.");
             }
+            
              
         }
       
