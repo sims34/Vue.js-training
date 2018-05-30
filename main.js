@@ -37,6 +37,7 @@ Vue.component('product',{
                         :disabled="! inStock"
                         :class="{disabledButton : ! inStock}">Add to cart</button>
             </div>
+            <product-review @submit-review="addReview"></product-review>
         </div>
     `,  
     
@@ -60,6 +61,7 @@ Vue.component('product',{
                   varianteImage :'./assets/vmSocks-blue.jpg' 
                 }
             ],
+            reviews:[]
            
         } 
         
@@ -71,6 +73,9 @@ Vue.component('product',{
                 },
         updateImage(index) {  // ES6 notation
             this.selectedVariant = index
+        },
+        addReview(productReview){
+            this.reviews.push(productReview);
         }
         
     },
@@ -89,6 +94,63 @@ Vue.component('product',{
            
         }
     },
+})
+//product review component it's child of product component
+Vue.component('product-review',{
+    template :
+    //@submit == trigger of the function onSubmit.
+    //prevent == ES6 tag for create an event without reload the page.
+    `
+    <form class="review-form" @submit.prevent="onSubmit"> 
+      <p>
+        <label for="name">Name:</label>
+        <input id="name" v-model="name" placeholder="name">
+      </p>
+      
+      <p>
+        <label for="review">Review:</label>      
+        <textarea id="review" v-model="review"></textarea>
+      </p>
+      
+      <p>
+        <label for="rating">Rating:</label>
+        <select id="rating" v-model.number="rating">
+          <option>5</option>
+          <option>4</option>
+          <option>3</option>
+          <option>2</option>
+          <option>1</option>
+        </select>
+      </p>
+          
+      <p>
+        <input type="submit" value="Submit">  
+      </p>    
+    
+    </form>
+    `,
+    data(){
+      return{
+          name: null,
+          review: null,
+          rating: null
+      }
+    },
+    methods:{
+        onSubmit(){
+            //create a variable let work only in the onSubmit function != global variable
+            let productReview ={
+                name : this.name,
+                review : this.review,
+                rating : this.rating
+            }
+            this.$emit('submit-review',productReview)
+            this.name = null
+            this.review= null
+            this.rating= null   
+        }
+      
+    }
 })
 
 //root element of Vuejs it become the 'Parent' of the application
