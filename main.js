@@ -140,16 +140,7 @@ Vue.component('product-review',{
           <option>1</option>
         </select>
       </p>
-    <!--  <p>Would you recommend this product?</p>
-      <label>
-        Yes
-        <input type="radio" value="Yes" v-model="recommend"/>
-      </label>
-      <label>
-        No
-        <input type="radio" value="No" v-model="recommend"/>
-      </label>
-      <p>-->
+
         <input type="submit" value="Submit">  
       </p>    
     
@@ -162,7 +153,7 @@ Vue.component('product-review',{
           rating: null,
           errors:[],
           flag : null,
-        //  recommend:null
+        
           
       }
       
@@ -170,26 +161,26 @@ Vue.component('product-review',{
     methods:{
         onSubmit(){
             this.flag = false;
-            if(this.name && this.review && this.rating){ // && recommend
+            if(this.name && this.review && this.rating){ 
                 //create a variable let work only in the onSubmit function != global variable
                 let productReview ={
                     name : this.name,
                     review : this.review,
                     rating : this.rating,
-                    // recommend:this.recommend
+                   
                 }
                 this.$emit('submit-review',productReview)
                 this.name = null
                 this.review= null
                 this.rating= null
                 this.flag = true
-                // this.recommend=null
+            
             
             }else{
                 if(!this.name) this.errors.push("Name is required.");  
                 if(!this.rating) this.errors.push("Rating is required.");
                 if(!this.review) this.errors.push("Review is required.");
-                // if(!this.recommend) this.errors.push("Recommend is required.");
+               
             }
             if(flag){
                 this.errors = []
